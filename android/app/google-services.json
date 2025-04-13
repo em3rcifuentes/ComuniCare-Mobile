@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "364114296012",
+    "project_id": "comunicare-app-e3e95",
+    "storage_bucket": "comunicare-app-e3e95.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364114296012:android:94e25e1da7c11a447fd669",
+        "android_client_info": {
+          "package_name": "com.comunicare.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhuuFkX-e3-M77IfyZ6hW5xoyUZBrosio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

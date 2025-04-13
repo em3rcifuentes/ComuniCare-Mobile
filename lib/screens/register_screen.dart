@@ -1,7 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController _nameController = TextEditingController();     // Nombre
+  final TextEditingController _surnameController = TextEditingController();  // Apellidos
+  final TextEditingController _emailController = TextEditingController();    // Correo
+  final TextEditingController _passwordController = TextEditingController(); // Contraseña
+  final TextEditingController _confirmController = TextEditingController();  // Confirmar contraseña
+
+  bool _loading = false; // Carga al crear la cuenta
+
+  Future<void> _registerUser() async {
+    if (_passwordController.text != _confirmController.text) {
+      _showMessage('Las contraseñas no coinciden');
+      return;
+    }
+
+    setState(() => _loading = true);
+
+    try {
+      // Registra el usuario en Firebase Auth
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      // Redirige al login
+      Navigator.pushReplacementNamed(context, '/login');
+    } on FirebaseAuthException catch (e) {
+      _showMessage('Error: ${e.message}');
+    } finally {
+      setState(() => _loading = false);
+    }
+  }
+
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,102 +59,76 @@ class RegisterScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-
-              // Icono de usuario en la esquina superior
-              Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  icon: const Icon(Icons.account_circle, size: 32),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/login');
-                  },
-                ),
-              ),
-
-              const SizedBox(height: 10),
-
-              // Título
-              const Center(
-                child: Text(
-                  'CREAR CUENTA',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.account_circle, size: 32),
+                    onPressed: () => Navigator.pushNamed(context, '/login'),
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 30),
-
-              // Campo: Nombre
-              const Text('NOMBRE', style: TextStyle(color: Colors.orange)),
-              _inputField(),
-
-              // Campo: Apellidos
-              const SizedBox(height: 15),
-              const Text('APELLIDOS', style: TextStyle(color: Colors.orange)),
-              _inputField(),
-
-              // Campo: Correo
-              const SizedBox(height: 15),
-              const Text('CORREO', style: TextStyle(color: Colors.orange)),
-              _inputField(),
-
-              // Campo: Contraseña
-              const SizedBox(height: 15),
-              const Text('CONTRASEÑA', style: TextStyle(color: Colors.orange)),
-              _inputField(obscure: true),
-
-              // Campo: Confirmar contraseña
-              const SizedBox(height: 15),
-              const Text('CONFIRMAR CONTRASEÑA', style: TextStyle(color: Colors.orange)),
-              _inputField(obscure: true),
-
-              const SizedBox(height: 40),
-
-              // Botón: Crear cuenta
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Aquí iría la lógica de registro
-                  },
-                  style: _buttonStyle(),
-                  child: const Text(
+                const SizedBox(height: 10),
+                const Center(
+                  child: Text(
                     'CREAR CUENTA',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.orange,
+                    ),
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 20),
-
-              // Botón: Volver
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  style: _buttonStyle(),
-                  child: const Text(
-                    'VOLVER',
-                    style: TextStyle(fontSize: 16),
+                const SizedBox(height: 30),
+                const Text('NOMBRE', style: TextStyle(color: Colors.orange)),
+                _inputField(controller: _nameController),
+                const SizedBox(height: 15),
+                const Text('APELLIDOS', style: TextStyle(color: Colors.orange)),
+                _inputField(controller: _surnameController),
+                const SizedBox(height: 15),
+                const Text('CORREO', style: TextStyle(color: Colors.orange)),
+                _inputField(controller: _emailController),
+                const SizedBox(height: 15),
+                const Text('CONTRASEÑA', style: TextStyle(color: Colors.orange)),
+                _inputField(controller: _passwordController, obscure: true),
+                const SizedBox(height: 15),
+                const Text('CONFIRMAR CONTRASEÑA', style: TextStyle(color: Colors.orange)),
+                _inputField(controller: _confirmController, obscure: true),
+                const SizedBox(height: 40),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _loading ? null : _registerUser,
+                    style: _buttonStyle(),
+                    child: _loading
+                        ? const CircularProgressIndicator(color: Colors.white)
+                        : const Text('CREAR CUENTA', style: TextStyle(fontSize: 16)),
                   ),
                 ),
-              ),
-            ],
+                const SizedBox(height: 20),
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: _buttonStyle(),
+                    child: const Text('VOLVER', style: TextStyle(fontSize: 16)),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  // Método para los campos de entrada
-  Widget _inputField({bool obscure = false}) {
+  // Campo de entrada personalizado
+  Widget _inputField({
+    required TextEditingController controller,
+    bool obscure = false,
+  }) {
     return TextField(
+      controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
         filled: true,

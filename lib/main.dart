@@ -1,6 +1,10 @@
 // Importa el paquete de Flutter con los widgets de Material Design
 import 'package:flutter/material.dart';
 
+// Importa Firebase Core y opciones
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; // Este archivo lo genera flutterfire configure
+
 // Importa todas las pantallas (screens) de la app desde su carpeta
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
@@ -12,8 +16,15 @@ import 'screens/emotion_screen.dart';
 import 'screens/bathroom_screen.dart';
 import 'screens/progress_screen.dart';
 
-// Función principal que ejecuta la aplicación
-void main() {
+void main() async {
+  // Asegura la inicialización de los bindings antes de usar async en main
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Inicializa Firebase con las opciones generadas
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const ComuniCareApp()); // Inicia la app con el widget principal
 }
 
@@ -35,15 +46,15 @@ class ComuniCareApp extends StatelessWidget {
 
       // Lista de rutas disponibles en la aplicación
       routes: {
-        '/': (context) => const WelcomeScreen(),        // Pantalla de bienvenida
-        '/login': (context) => const LoginScreen(),     // Pantalla de inicio de sesión
+        '/': (context) => const WelcomeScreen(),          // Pantalla de bienvenida
+        '/login': (context) => const LoginScreen(),       // Pantalla de inicio de sesión
         '/register': (context) => const RegisterScreen(), // Pantalla de registro
         '/decision': (context) => const DecisionScreen(), // Menú principal
         '/foods': (context) => const FoodsScreen(),       // Módulo: Comidas
         '/activities': (context) => const ActivitiesScreen(), // Módulo: Actividades
-        '/emotion': (context) => const EmotionScreen(),     // Módulo: Emociones
-        '/bathroom': (context) => const BathroomScreen(),   // Módulo: Baño
-        '/progress': (context) => const ProgressScreen(),   // Pantalla de progreso
+        '/emotion': (context) => const EmotionScreen(),   // Módulo: Emociones
+        '/bathroom': (context) => const BathroomScreen(), // Módulo: Baño
+        '/progress': (context) => const ProgressScreen(), // Pantalla de progreso
       },
     );
   }

@@ -1,14 +1,16 @@
+// Plugins de Gradle necesarios para Android, Kotlin y Flutter
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Configuración del proyecto Android
 android {
     namespace = "com.comunicare.app"
 
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    ndkVersion = "27.0.12077973"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -21,7 +23,7 @@ android {
 
     defaultConfig {
         applicationId = "com.comunicare.app"
-        minSdk = flutter.minSdkVersion
+        minSdk = 23
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -35,7 +37,10 @@ android {
     }
 }
 
+// Ruta al proyecto raíz de Flutter
 flutter {
-    // Ruta del proyecto Flutter raíz (no cambies esto)
     source = "../.."
 }
+
+// 🔽 Esta línea activa Firebase (debe ir al final)
+apply(plugin = "com.google.gms.google-services")
