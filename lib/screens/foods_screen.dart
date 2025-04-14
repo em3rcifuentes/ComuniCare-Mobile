@@ -6,7 +6,7 @@ class FoodsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( // Evita superponer contenido sobre áreas del sistema (notch, barra de estado, etc.)
+    return SafeArea( // Evita superponer contenido sobre áreas del sistema
       child: Scaffold( 
         body: Container(
           // Fondo con degradado vertical 
@@ -75,7 +75,7 @@ class FoodsScreen extends StatelessWidget {
                     elevation: 5, // Sombra del botón
                   ),
                   onPressed: () {
-                    Navigator.pop(context); // Regresa a la pantalla anterior
+                    Navigator.pushNamedAndRemoveUntil(context, '/decision', (route) => false);
                   },
                   child: const Text(
                     'volver',
@@ -96,7 +96,6 @@ class FoodsScreen extends StatelessWidget {
   }
 }
 
-// Widget personalizado que representa cada opción (imagen + texto)
 class FoodOptionButton extends StatelessWidget {
   final String imagePath; 
   final String label;     

@@ -1,11 +1,6 @@
-// Importa el paquete de Flutter con los widgets de Material Design
 import 'package:flutter/material.dart';
-
-// Importa Firebase Core y opciones
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Este archivo lo genera flutterfire configure
-
-// Importa todas las pantallas (screens) de la app desde su carpeta
+import 'firebase_options.dart'; 
 import 'screens/welcome_screen.dart';
 import 'screens/login_screen.dart';
 import 'screens/register_screen.dart';
@@ -17,34 +12,26 @@ import 'screens/bathroom_screen.dart';
 import 'screens/progress_screen.dart';
 
 void main() async {
-  // Asegura la inicialización de los bindings antes de usar async en main
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Inicializa Firebase con las opciones generadas
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const ComuniCareApp()); // Inicia la app con el widget principal
+  runApp(const ComuniCareApp()); 
 }
 
-// Widget principal de la aplicación
 class ComuniCareApp extends StatelessWidget {
   const ComuniCareApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Elimina el banner de "debug" en la esquina superior derecha
       debugShowCheckedModeBanner: false,
-
-      // Título de la aplicación (no visible directamente en la interfaz)
       title: 'ComuniCare',
 
-      // Define la primera pantalla que se muestra al iniciar la app
       initialRoute: '/',
 
-      // Lista de rutas disponibles en la aplicación
       routes: {
         '/': (context) => const WelcomeScreen(),          // Pantalla de bienvenida
         '/login': (context) => const LoginScreen(),       // Pantalla de inicio de sesión

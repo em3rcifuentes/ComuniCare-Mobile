@@ -23,9 +23,13 @@ class _LoginScreenState extends State<LoginScreen> {
         password: _passwordController.text.trim(),
       );
 
-      Navigator.pushReplacementNamed(context, '/decision');
-    } on FirebaseAuthException catch (e) {
+      Navigator.pushReplacementNamed(
+        context,
+        '/',
+        arguments: {'mostrarSaludo': true},
+      );
 
+    } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.message}')),
       );

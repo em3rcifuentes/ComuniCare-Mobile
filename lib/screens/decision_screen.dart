@@ -92,7 +92,7 @@ class DecisionScreen extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context); 
+                 Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber,

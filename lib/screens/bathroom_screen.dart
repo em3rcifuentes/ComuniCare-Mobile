@@ -71,7 +71,7 @@ class BathroomScreen extends StatelessWidget {
                     elevation: 5,
                   ),
                   onPressed: () {
-                    Navigator.pop(context); 
+                    Navigator.pushNamedAndRemoveUntil(context, '/decision', (route) => false); 
                   },
                   child: const Text(
                     'volver',
