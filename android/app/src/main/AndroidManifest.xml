@@ -1,12 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.comunicare.app"> <!-- ← Asegúrate que este "package" coincida con el nombre usado en Firebase -->
+    package="com.comunicare.app">
 
     <application
         android:label="comunicare_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <!-- ✅ Agregado para Firebase (notificaciones por defecto, opcional) -->
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@mipmap/ic_launcher" />

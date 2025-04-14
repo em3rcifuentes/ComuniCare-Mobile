@@ -1,4 +1,3 @@
-// Configura la gestión de plugins, incluido Flutter y Google Services
 pluginManagement {
     val flutterSdkPath = run {
         val properties = java.util.Properties()
@@ -8,17 +7,15 @@ pluginManagement {
         flutterSdkPath
     }
 
-    // Incluye Flutter Tools para soporte en proyectos Flutter
     includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
 
     repositories {
-        google()            // 🔹 Repositorio necesario para Google Services (Firebase)
+        google()            
         mavenCentral()
         gradlePluginPortal()
     }
 }
 
-// Plugins de Gradle requeridos por el proyecto
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
     id("com.android.application") version "8.7.0" apply false
@@ -28,5 +25,4 @@ plugins {
     id("org.jetbrains.kotlin.android") version "1.8.22" apply false
 }
 
-// Incluye el módulo app
 include(":app")

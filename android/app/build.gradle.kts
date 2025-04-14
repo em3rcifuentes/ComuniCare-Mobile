@@ -1,11 +1,9 @@
-// Plugins de Gradle necesarios para Android, Kotlin y Flutter
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-// Configuración del proyecto Android
 android {
     namespace = "com.comunicare.app"
 
@@ -37,10 +35,8 @@ android {
     }
 }
 
-// Ruta al proyecto raíz de Flutter
 flutter {
     source = "../.."
 }
 
-// 🔽 Esta línea activa Firebase (debe ir al final)
 apply(plugin = "com.google.gms.google-services")
