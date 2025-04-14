@@ -1,17 +1,15 @@
-// Importa los widgets de Flutter necesarios
 import 'package:flutter/material.dart';
-import '../counter_decision.dart'; // Importa el contador global
+import '../counter_decision.dart'; 
 
-// Define un widget sin estado llamado FoodsScreen
 class FoodsScreen extends StatelessWidget {
-  const FoodsScreen({super.key}); // Constructor constante para mejor rendimiento
+  const FoodsScreen({super.key}); 
 
   @override
   Widget build(BuildContext context) {
     return SafeArea( // Evita superponer contenido sobre áreas del sistema (notch, barra de estado, etc.)
-      child: Scaffold( // Estructura básica de la pantalla con barra, cuerpo, etc.
+      child: Scaffold( 
         body: Container(
-          // Fondo con degradado vertical de azul claro a verde
+          // Fondo con degradado vertical 
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -19,7 +17,7 @@ class FoodsScreen extends StatelessWidget {
               colors: [Color(0xFFADE8F4), Color(0xFFCAF7A1)],
             ),
           ),
-          child: Column( // Columna principal que contiene todo el contenido
+          child: Column( 
             children: [
               const SizedBox(height: 30), // Espacio superior
 
@@ -29,13 +27,12 @@ class FoodsScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFF9A825), // Naranja vibrante
+                  color: Color(0xFFF9A825), 
                 ),
               ),
 
               const SizedBox(height: 30), // Espacio entre título y botones
 
-              // Sección expandible que contiene las opciones en cuadrícula
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16), // Margen horizontal
@@ -65,7 +62,7 @@ class FoodsScreen extends StatelessWidget {
                 ),
               ),
 
-              // Botón de navegación para volver a la pantalla anterior
+              // Botón de navegación para volver
               Padding(
                 padding: const EdgeInsets.only(bottom: 30), // Espacio inferior
                 child: ElevatedButton(
@@ -101,8 +98,8 @@ class FoodsScreen extends StatelessWidget {
 
 // Widget personalizado que representa cada opción (imagen + texto)
 class FoodOptionButton extends StatelessWidget {
-  final String imagePath; // Ruta de la imagen a mostrar
-  final String label;     // Texto que acompaña a la imagen
+  final String imagePath; 
+  final String label;     
 
   const FoodOptionButton({
     super.key,
@@ -121,16 +118,15 @@ class FoodOptionButton extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Has seleccionado $label'),
-            duration: Duration(milliseconds: 800), // Tiempo breve
+            duration: Duration(milliseconds: 800),
           ),
         );
 
-        // Regresa a la pantalla de decisión luego de un pequeño retraso
         Future.delayed(const Duration(milliseconds: 800), () {
           Navigator.pushNamed(context, '/decision');
         });
       },
-      child: Column( // Columna con imagen + texto
+      child: Column( 
         children: [
           Expanded( // Hace que la imagen ocupe el espacio disponible
             child: Image.asset(

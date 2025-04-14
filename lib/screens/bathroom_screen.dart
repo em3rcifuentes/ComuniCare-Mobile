@@ -1,17 +1,14 @@
-// Importa los componentes visuales del framework Flutter
 import 'package:flutter/material.dart';
-import '../counter_decision.dart'; // Importa el sistema de contador
+import '../counter_decision.dart'; 
 
-// Widget principal de la pantalla del módulo Baño
 class BathroomScreen extends StatelessWidget {
   const BathroomScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( // Evita que los contenidos choquen con la barra de estado o notch
+    return SafeArea( 
       child: Scaffold(
         body: Container(
-          // Fondo con gradiente de azul a verde
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFFADE8F4), Color(0xFFCAF7A1)],
@@ -21,9 +18,7 @@ class BathroomScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30), // Espacio superior
-
-              // Título principal de la pantalla
+              const SizedBox(height: 30), 
               const Text(
                 '¿VAMOS AL BAÑO?',
                 style: TextStyle(
@@ -33,9 +28,8 @@ class BathroomScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 30), // Espacio entre título y opciones
+              const SizedBox(height: 30), 
 
-              // Cuadrícula de 2x2 con opciones del módulo baño
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -65,7 +59,6 @@ class BathroomScreen extends StatelessWidget {
                 ),
               ),
 
-              // Botón "Volver" abajo
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: ElevatedButton(
@@ -78,7 +71,7 @@ class BathroomScreen extends StatelessWidget {
                     elevation: 5,
                   ),
                   onPressed: () {
-                    Navigator.pop(context); // Vuelve a la pantalla anterior
+                    Navigator.pop(context); 
                   },
                   child: const Text(
                     'volver',
@@ -99,10 +92,9 @@ class BathroomScreen extends StatelessWidget {
   }
 }
 
-// Widget personalizado reutilizable para cada botón de opción del baño
 class BathroomOption extends StatelessWidget {
-  final String imagePath; // Ruta de la imagen a mostrar
-  final String label;     // Texto a mostrar debajo de la imagen
+  final String imagePath; 
+  final String label;     
 
   const BathroomOption({
     super.key,
@@ -114,15 +106,11 @@ class BathroomOption extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Aumenta el contador de uso del módulo baño
         CounterDecision.instance.incrementBathroom();
-
-        // Mostrar un mensaje corto al seleccionar una opción
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Seleccionaste: $label')),
         );
 
-        // Redirigir a pantalla de decisión luego de un breve retardo
         Future.delayed(const Duration(milliseconds: 800), () {
           Navigator.pushNamed(context, '/decision');
         });
@@ -131,7 +119,7 @@ class BathroomOption extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              imagePath, // Muestra la imagen asociada a la opción
+              imagePath, 
               fit: BoxFit.contain,
             ),
           ),
@@ -140,7 +128,7 @@ class BathroomOption extends StatelessWidget {
             label,
             style: const TextStyle(
               fontSize: 18,
-              color: Color(0xFFF9A825), // Color del texto
+              color: Color(0xFFF9A825), 
               fontWeight: FontWeight.w600,
             ),
           ),

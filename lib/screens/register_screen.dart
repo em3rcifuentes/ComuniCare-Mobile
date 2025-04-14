@@ -15,7 +15,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _passwordController = TextEditingController(); // Contraseña
   final TextEditingController _confirmController = TextEditingController();  // Confirmar contraseña
 
-  bool _loading = false; // Carga al crear la cuenta
+  bool _loading = false;
 
   Future<void> _registerUser() async {
     if (_passwordController.text != _confirmController.text) {
@@ -26,13 +26,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() => _loading = true);
 
     try {
-      // Registra el usuario en Firebase Auth
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
-      // Redirige al login
       Navigator.pushReplacementNamed(context, '/login');
     } on FirebaseAuthException catch (e) {
       _showMessage('Error: ${e.message}');
@@ -122,7 +120,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  // Campo de entrada personalizado
   Widget _inputField({
     required TextEditingController controller,
     bool obscure = false,
@@ -142,7 +139,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  // Estilo compartido para botones
   ButtonStyle _buttonStyle() {
     return ElevatedButton.styleFrom(
       backgroundColor: Colors.amber,

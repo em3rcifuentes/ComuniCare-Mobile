@@ -6,7 +6,6 @@ class DecisionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // SafeArea asegura que el contenido no se solape con la barra de estado o bordes curvos
       body: SafeArea(
         child: Container(
           width: double.infinity,
@@ -31,7 +30,6 @@ class DecisionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Cuadro de opciones principales en formato grid
               Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
@@ -67,13 +65,12 @@ class DecisionScreen extends StatelessWidget {
                 ),
               ),
 
-              // Botón para ir a la pantalla de progreso (diferente color)
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/progress');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green, // Color diferente para destacar
+                  backgroundColor: Colors.green, 
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -93,10 +90,9 @@ class DecisionScreen extends StatelessWidget {
 
               const SizedBox(height: 10),
 
-              // Botón para volver (estilo tradicional)
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context); // Vuelve a la pantalla anterior
+                  Navigator.pop(context); 
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber,
@@ -125,12 +121,11 @@ class DecisionScreen extends StatelessWidget {
     );
   }
 
-  // Método auxiliar para construir una opción con imagen y texto
   Widget _buildOption(BuildContext context,
       {required String image, required String label, required String route}) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, route); // Navega a la ruta especificada
+        Navigator.pushNamed(context, route); 
       },
       child: Column(
         children: [

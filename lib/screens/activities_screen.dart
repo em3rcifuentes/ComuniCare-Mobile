@@ -1,17 +1,15 @@
-// Importa el paquete de Flutter que permite construir la interfaz
 import 'package:flutter/material.dart';
-import '../counter_decision.dart'; // Importa el archivo del contador
+import '../counter_decision.dart'; 
 
-// Pantalla principal para el módulo de actividades
 class ActivitiesScreen extends StatelessWidget {
   const ActivitiesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( // Asegura que los elementos no se oculten bajo la barra de estado
+    return SafeArea( 
       child: Scaffold(
         body: Container(
-          // Fondo con gradiente vertical de azul claro a verde claro
+
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFFADE8F4), Color(0xFFCAF7A1)],
@@ -21,26 +19,23 @@ class ActivitiesScreen extends StatelessWidget {
           ),
           child: Column(
             children: [
-              const SizedBox(height: 30), // Espaciado superior
-
-              // Título de la pantalla
+              const SizedBox(height: 30), 
               const Text(
                 'VAMOS A DIVERTIRNOS',
                 style: TextStyle(
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFFF9A825), // Naranja vibrante
+                  color: Color(0xFFF9A825), 
                 ),
               ),
 
-              const SizedBox(height: 30), // Espacio debajo del título
+              const SizedBox(height: 30), 
 
-              // Cuadrícula 2x2 con botones de actividades
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: GridView.count(
-                    crossAxisCount: 2, // Dos columnas
+                    crossAxisCount: 2, 
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     children: const [
@@ -65,12 +60,11 @@ class ActivitiesScreen extends StatelessWidget {
                 ),
               ),
 
-              // Botón para volver a la pantalla anterior
               Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFFC107), // Color amarillo
+                    backgroundColor: Color(0xFFFFC107), 
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
@@ -78,7 +72,7 @@ class ActivitiesScreen extends StatelessWidget {
                     elevation: 5,
                   ),
                   onPressed: () {
-                    Navigator.pop(context); // Regresa a la pantalla anterior
+                    Navigator.pop(context); 
                   },
                   child: const Text(
                     'volver',
@@ -99,10 +93,9 @@ class ActivitiesScreen extends StatelessWidget {
   }
 }
 
-// Widget reutilizable que representa un botón con imagen + texto para cada actividad
 class ActivityButton extends StatelessWidget {
-  final String imagePath; // Ruta de la imagen
-  final String label;     // Texto descriptivo
+  final String imagePath; 
+  final String label;     
 
   const ActivityButton({
     super.key,
@@ -114,15 +107,11 @@ class ActivityButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Incrementa el contador del módulo Actividades
         CounterDecision.instance.incrementActivities();
-
-        // Muestra un mensaje con el nombre de la actividad seleccionada
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Seleccionaste $label')),
         );
 
-        // Después de 800 ms, navega automáticamente a la pantalla de decisión
         Future.delayed(const Duration(milliseconds: 800), () {
           Navigator.pushNamed(context, '/decision');
         });
@@ -131,13 +120,13 @@ class ActivityButton extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              imagePath, // Muestra la imagen desde assets
+              imagePath, 
               fit: BoxFit.contain,
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            label, // Nombre de la actividad
+            label, 
             style: const TextStyle(
               fontSize: 18,
               color: Color(0xFFF9A825),

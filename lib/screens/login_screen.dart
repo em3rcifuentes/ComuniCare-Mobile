@@ -9,26 +9,23 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final TextEditingController _emailController = TextEditingController(); // Controlador para el campo de correo
-  final TextEditingController _passwordController = TextEditingController(); // Controlador para el campo de contraseña
+  final TextEditingController _emailController = TextEditingController(); 
+  final TextEditingController _passwordController = TextEditingController(); 
 
-  bool _loading = false; // Indicador de carga para mostrar mientras se valida
+  bool _loading = false;
 
-  // Método que maneja el inicio de sesión con Firebase
   Future<void> _loginUser() async {
     setState(() => _loading = true);
 
     try {
-      // Intenta iniciar sesión con correo y contraseña
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passwordController.text.trim(),
       );
 
-      // Redirige al menú principal
       Navigator.pushReplacementNamed(context, '/decision');
     } on FirebaseAuthException catch (e) {
-      // Muestra un mensaje de error si algo falla
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error: ${e.message}')),
       );
@@ -119,7 +116,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Campo de entrada reutilizable
   Widget _inputField({required TextEditingController controller, bool obscure = false}) {
     return TextField(
       controller: controller,
@@ -136,7 +132,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Estilo de botón reutilizable
   ButtonStyle _buttonStyle() {
     return ElevatedButton.styleFrom(
       backgroundColor: Colors.amber,

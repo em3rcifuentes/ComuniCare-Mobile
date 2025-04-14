@@ -5,13 +5,13 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea( // Protege contenido de cámaras, barras, etc.
+    return SafeArea( // Protege contenido superior
       child: Scaffold(
         body: Container(
           width: double.infinity,
           height: double.infinity,
 
-          // Fondo con gradiente azul a verde claro
+          // Fondo azul a verde claro
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               colors: [Color(0xFFA6DCEF), Color(0xFFC8FACC)],
@@ -29,7 +29,7 @@ class WelcomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Icono de usuario (futuro acceso a perfil o login)
+                    // Icono de usuario 
                     IconButton(
                       icon: const Icon(Icons.account_circle, size: 32),
                       onPressed: () {
@@ -37,7 +37,7 @@ class WelcomeScreen extends StatelessWidget {
                       },
                     ),
 
-                    // Icono de configuración (a futuro)
+                    // Icono de configuración
                     IconButton(
                       icon: const Icon(Icons.settings, size: 32),
                       onPressed: () {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../counter_decision.dart'; // Importa la clase de contador
+import '../counter_decision.dart'; 
 
 class ProgressScreen extends StatefulWidget {
   const ProgressScreen({super.key});
